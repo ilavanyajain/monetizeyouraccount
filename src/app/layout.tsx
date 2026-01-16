@@ -13,9 +13,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Oops, Take Premium – Monetize Your Twitter Audience Authentically",
+  title: "Monetize Your X Account",
   description:
     "Get paid to like, bookmark, and retweet high-quality posts for brands you trust. Transparent rates, negotiable based on your reach and engagement.",
+  icons: {
+    icon: "/image.png",
+    shortcut: "/image.png",
+    apple: "/image.png",
+  },
 };
 
 export default function RootLayout({

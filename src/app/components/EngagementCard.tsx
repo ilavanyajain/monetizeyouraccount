@@ -21,6 +21,7 @@ interface EngagementCardProps {
   volume: string;
   disclaimer: string;
   isPremium?: boolean;
+  priceLabel?: string;
 }
 
 export function EngagementCard({
@@ -30,6 +31,7 @@ export function EngagementCard({
   volume,
   disclaimer,
   isPremium = false,
+  priceLabel = "Per action",
 }: EngagementCardProps) {
   return (
     <div
@@ -58,7 +60,7 @@ export function EngagementCard({
         } p-3 text-xs sm:rounded-2xl sm:p-4 sm:text-sm`}
       >
         <div className="space-y-1.5">
-          <PricingRow label="Per action" value={pricePerAction} />
+          <PricingRow label={priceLabel} value={pricePerAction} />
           <PricingRow label="Typical volume" value={volume} />
         </div>
         <p className="mt-2 text-[10px] text-zinc-500 sm:mt-1 sm:text-xs">

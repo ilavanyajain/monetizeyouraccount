@@ -1,7 +1,7 @@
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { EngagementCard } from "./components/EngagementCard";
-import { QualityControl } from "./components/QualityControl";
+import { TrustFeatures } from "./components/TrustFeatures";
 import { ApplicationForm } from "./components/ApplicationForm";
 
 export default function Home() {
@@ -18,33 +18,26 @@ export default function Home() {
             <EngagementCard
               title="Likes & Bookmarks"
               description="Quiet engagement. We send you posts worth supporting; you like or bookmark what fits. Simple and private."
-              pricePerAction="$5 – $15"
+              pricePerAction="$50 – $90"
+              priceLabel="Bundle (30 actions)"
               volume="20 – 40/month"
               disclaimer="Rates based on engagement quality."
             />
             <EngagementCard
               title="Retweets & Quotes"
               description="Public amplification. Higher visibility, higher rates. Only for campaigns that perfectly align with your voice."
-              pricePerAction="$20 – $50"
+              pricePerAction="$150 – $300"
+              priceLabel="Bundle (30 actions)"
               volume="10 – 30/month"
               disclaimer="Pricing negotiable based on reach."
               isPremium={true}
             />
           </section>
 
-          <QualityControl />
+          <TrustFeatures />
           
           <ApplicationForm />
         </main>
-
-        <footer className="mt-4 flex flex-col gap-2 border-t border-zinc-900 pt-4 text-[10px] text-zinc-500 sm:flex-row sm:items-center sm:justify-between sm:text-[11px]">
-          <span>© {new Date().getFullYear()} Oops, Take Premium.</span>
-          <div className="flex gap-4">
-             <a href="#" className="hover:text-zinc-300 transition-colors">Terms</a>
-             <a href="#" className="hover:text-zinc-300 transition-colors">Privacy</a>
-             <span>Not affiliated with X / Twitter.</span>
-          </div>
-        </footer>
       </div>
     </div>
   );

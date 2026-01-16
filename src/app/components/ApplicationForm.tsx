@@ -1,19 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState } from "react";
+import { submitApplication } from "../actions";
+
+const initialState = {
+  status: "idle",
+  message: "",
+};
 
 export function ApplicationForm() {
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const [state, formAction, isPending] = useActionState(submitApplication, initialState);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setStatus("submitting");
-    // Simulate network delay
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setStatus("success");
-  }
-
-  if (status === "success") {
+  if (state.status === "success") {
     return (
       <div className="mt-4 rounded-2xl border border-green-900/30 bg-green-950/10 p-8 text-center sm:rounded-3xl">
         <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10 text-green-500">
@@ -57,7 +55,7 @@ export function ApplicationForm() {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="flex w-full flex-col gap-4 md:max-w-sm">
+        <form action={formAction} className="flex w-full flex-col gap-4 md:max-w-sm">
           <div className="space-y-1">
             <label htmlFor="handle" className="text-xs font-medium text-zinc-300">
               Twitter/X Handle
@@ -66,6 +64,7 @@ export function ApplicationForm() {
               <span className="absolute left-3 top-2.5 text-zinc-500 text-sm">@</span>
               <input
                 id="handle"
+                name="handle"
                 required
                 type="text"
                 placeholder="username"
@@ -80,6 +79,7 @@ export function ApplicationForm() {
             </label>
             <input
               id="email"
+              name="email"
               required
               type="email"
               placeholder="you@example.com"
@@ -87,12 +87,16 @@ export function ApplicationForm() {
             />
           </div>
 
+          {state.status === "error" && (
+            <p className="text-xs text-red-400">{state.message}</p>
+          )}
+
           <button
             type="submit"
-            disabled={status === "submitting"}
+            disabled={isPending}
             className="mt-2 w-full rounded-lg bg-amber-400 px-4 py-2.5 text-sm font-semibold text-black transition hover:bg-amber-300 disabled:opacity-70 disabled:cursor-not-allowed"
           >
-            {status === "submitting" ? "Submitting..." : "Request Invite"}
+            {isPending ? "Submitting..." : "Request Invite"}
           </button>
           
           <p className="text-center text-[10px] text-zinc-500">
